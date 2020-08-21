@@ -1,9 +1,22 @@
-function MDbuild()
-    let filename=@%
-    let filename = substitute(filename, "md$", "html", "")
-     execute '!marked --input ' @% ' --output ' filename
-     execute '!cat ~/.vim/plugged/mdbuild/prehtml' filename '~/.vim/plugged/mdbuild/posthtml > final.html'
+let s:plugin_path = expand('<sfile>:p:h:h')
+let s:prehtml = s:plugin_path.'/web/prehtml'
+let s:lightstyle = s:plugin_path.'/web/lightstyle.css'
+let s:midhtml = s:plugin_path.'/web/midhtml'
+let s:posthtml = s:plugin_path.'/web/posthtml'
+
+function MdBuild()
+    let filename = substitute(@%, "md$", "html", "")
+    silent execute '!marked --input ' @% ' --output tempxyz'
+    silent execute '!cat ' s:prehtml s:lightstyle s:midhtml ' tempxyz ' s:posthtml '>' filename
     execute ':redraw!'
 endfunction
 
-autocmd InsertLeave * call MDbuild()
+function MdPreview()
+    silent execute 'w'
+    MdBuild()
+    let filename = substitute(@%, "md$", "html", "")
+    silent execute '!xdg-open ' filename
+    execute ':redraw!'
+endfunction
+
+autocmd BufWritePost * call MdBuild()
