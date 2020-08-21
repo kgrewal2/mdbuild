@@ -1,5 +1,5 @@
-# mdbuild
-mdbuild is a markdown-to-HTML conversion plugin for vim. 
+# MDbuild
+MDbuild is a markdown-to-HTML conversion plugin for vim. 
 
 ### Requirements
 - python (for local HTTP server)
@@ -8,6 +8,14 @@ mdbuild is a markdown-to-HTML conversion plugin for vim.
 ### Usage
 - `:call MDbuild()` to convert current file into HTML file.
 - `:call MDpreview()` to open the generated HTML file in the browser.
+
+#### Auto-refresh HTML
+- Open another terminal. (Do not close it while you are working with the file)
+- Run `python -m http.server`
+- Open the given url (generally `0.0.0.0:8000`) in the preferred browser.
+- Go to the generated html file.
+
+Now the HTML file will be automatically refreshed when you call `MDbuild()
 
 ### Options
 - Add `autocmd BufWritePost * call MDbuild()` to `~/.vim/ftplugin/markdown.vim` to auto-generate HTML when markdown is saved.
