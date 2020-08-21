@@ -22,6 +22,7 @@ Now the HTML file will be automatically refreshed when you call `MDbuild()
 
 ### Pending
 - Start python server using vim.
+- Markdown-friendly mappings
 
 ### Credits
 - [marked](https://github.com/markedjs/marked): parses markdown to HTML
